@@ -1,0 +1,163 @@
+@import "./base.scss";
+@import "./mixins.scss";
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+#app {
+  width: 500px;
+  min-height: 100px;
+}
+
+a {
+  text-decoration: none;
+  color: #72c05d;
+  &:hover {
+    color: rgb(239, 239, 239);
+  }
+}
+
+/*修改滚动条样式*/
+::-webkit-scrollbar {
+  width: 7px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(239, 239, 239);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb {
+  background: #212529;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+::-webkit-scrollbar-corner {
+  background: #179a16;
+}
+// 声明
+.declare-container {
+  @include set_w_h(100%, 30px);
+  @include flex_item_center;
+  padding-left: 10px;
+  border-bottom: 1px solid #eee;
+  background-color: #2b3e50;
+  margin-bottom: 5px;
+  box-shadow: 0px 4px 7px 0px #bbccdd;
+  .title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e6db74;
+  }
+  .version {
+    font-size: 16px;
+    color: $FontFFFColor;
+    margin-left: 10px;
+  }
+}
+.container {
+  padding: 0 10px 10px 10px;
+  @include set_w_h(100%, calc(100% - 30px));
+  display: flex;
+  & > div {
+    border: 1px solid $BorderColor1;
+    border-radius: 5px;
+    padding: 10px;
+    p {
+      word-wrap: break-word;
+      word-break: break-all;
+    }
+  }
+  .left-container {
+    @include set_w_h(350px, 95%);
+    overflow-y: scroll;
+    .title-container {
+      @include set_w_h(100%, 30px);
+      font-size: 13px;
+      font-weight: bold;
+      @include flex_between_center;
+      border-bottom: 1px solid rgb(187, 204, 221);
+    }
+    // 路由列表
+    .router-list {
+      cursor: pointer;
+      margin: 1px 0;
+      padding: 5px;
+      font-size: 13px;
+      @include flex_between_center;
+      &:hover {
+        background-color: rgb(233, 236, 239);
+      }
+      // 请求协议
+      .method {
+        color: rgb(40, 167, 69);
+        font-weight: bold;
+        padding: 2px 5px;
+        background: rgb(229, 233, 240);
+      }
+    }
+  }
+  .center-container {
+    @include set_w_h(350px, 95%);
+    padding: 10px;
+    margin-left: 10px;
+    background-color: $CodeBGColor;
+    color: $FontFFFColor;
+    font-size: 14px;
+    .title {
+      font-size: 15px;
+      color: #f56c6c;
+    }
+    .tips {
+      color: #f56c6c;
+      font-size: 15px;
+    }
+    .url {
+      color: #e6db74;
+    }
+    .mark {
+      color: #72c05d;
+    }
+    .btn-container {
+      padding: 10px 0;
+      @include set_w_h;
+      .download-container {
+        .button {
+          @include set_w_h(90px, 30px);
+          border-radius: 5px;
+          margin-top: 10px;
+          box-shadow: 0 0 1px #909399;
+          background-color: #909399;
+          border: 1px solid #a2a7af;
+          @include flex_center;
+          color: $FontFFFColor;
+          cursor: pointer;
+          &:hover {
+            background-color: #525558;
+          }
+        }
+      }
+      .file {
+        margin-top: 10px;
+      }
+    }
+  }
+  .right-container {
+    @include set_w_h(auto, 92%);
+    padding: 20px;
+    flex: 0.98;
+    margin-left: 10px;
+    background-color: $CodeBGColor;
+    color: $FontFFFColor;
+    overflow-y: scroll;
+  }
+}

@@ -14,6 +14,6 @@
   ],
   "browser_action": {
     "default_icon": "images/128.png",
-    "default_popup": "popup.html"
+    "default_popup": "index.html"
   }
 }
