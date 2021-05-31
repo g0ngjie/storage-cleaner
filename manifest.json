@@ -15,24 +15,5 @@
   "browser_action": {
     "default_icon": "images/128.png"
   },
-  "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": true
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "http://*/",
-        "https://*/"
-      ],
-      "js": [
-        "content.js"
-      ],
-      "run_at": "document_start",
-      "all_frames": true
-    }
-  ],
   "devtools_page": "devtools.html"
 }
