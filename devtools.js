@@ -3,5 +3,5 @@
 chrome.devtools.panels.create(
   "Storage Cleaner",
   "images/128.png",
-  "mypanel.html"
+  "page/dist/index.html"
 );
