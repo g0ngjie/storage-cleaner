@@ -27,16 +27,22 @@ export default {
     },
   },
   created() {
-    sessionStorage.a = 1;
-    sessionStorage.b = 1;
-    sessionStorage.c = 1;
-    sessionStorage.d = 1;
+    // sessionStorage.a = 1;
+    // sessionStorage.b = 1;
+    // sessionStorage.c = 1;
+    // sessionStorage.d = 1;
     this.sessionData = [];
     this.localData = [];
     for (const key in sessionStorage) {
       if (Object.hasOwnProperty.call(sessionStorage, key)) {
         const value = sessionStorage[key];
         this.sessionData.push({ key, value });
+      }
+    }
+    for (const key in localStorage) {
+      if (Object.hasOwnProperty.call(localStorage, key)) {
+        const value = localStorage[key];
+        this.localData.push({ key, value });
       }
     }
   },
