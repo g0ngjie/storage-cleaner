@@ -5,3 +5,20 @@ chrome.devtools.panels.create(
   "images/128.png",
   "page/dist/index.html"
 );
+
+// 与后台页面消息通信-长连接
+const port = chrome.runtime.connect({ name: "devtools" });
+// 监听后台页面消息
+port.onMessage.addListener((message) => {
+  console.log("[debug]监听后台页面消息message:", message);
+});
+// 往后台页面发送消息
+port.postMessage({
+  name: "original",
+  tabId: chrome.devtools.inspectedWindow.tabId,
+});
+
+window.aaa = 123
+function test() {
+  console.log("[debug]123:", 123)
+}

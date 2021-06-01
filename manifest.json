@@ -15,6 +15,12 @@
   "browser_action": {
     "default_icon": "images/128.png"
   },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
   "content_scripts": [
     {
       "matches": [
@@ -28,5 +34,6 @@
       "all_frames": true
     }
   ],
+  "web_accessible_resources": ["inject.js"],
   "devtools_page": "devtools.html"
 }
