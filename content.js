@@ -18,9 +18,10 @@ window.addEventListener(
 // 转发给background
 chrome.runtime.sendMessage({
   to: "background",
+  from: "content",
   type: "sendStorage",
   data: {
-    localStorage,
-    sessionStorage,
+    local: localStorage,
+    session: sessionStorage,
   },
 });

@@ -1,4 +1,5 @@
 <template>
+  <el-button @click="handleReload">reload</el-button>
   <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
     <el-tab-pane label="Session" name="session">
       <Table :data="sessionData" />
@@ -11,6 +12,9 @@
 
 <script>
 import Table from "./table.vue";
+import { connect, sendMsg } from "./notice";
+import { getTableData } from "./utils";
+
 export default {
   name: "App",
   components: { Table },
@@ -22,29 +26,29 @@ export default {
     };
   },
   methods: {
+    handleReload() {
+      console.log("[debug]reload:")
+      sendMsg({ type: "reload" });
+    },
     handleClick(tab, event) {
       console.log(tab, event);
     },
+    listener() {
+      const port = connect();
+      // 监听后台页面消息
+      if (port)
+        port.onMessage.addListener((message) => {
+          const { data, from } = message || {};
+          if (from && from === "content") {
+            const { local, session } = data || {};
+            this.sessionData = getTableData(session || {});
+            this.localData = getTableData(local || {});
+          }
+        });
+    },
   },
   created() {
-    // sessionStorage.a = 1;
-    // sessionStorage.b = 1;
-    // sessionStorage.c = 1;
-    // sessionStorage.d = 1;
-    this.sessionData = [];
-    this.localData = [];
-    for (const key in sessionStorage) {
-      if (Object.hasOwnProperty.call(sessionStorage, key)) {
-        const value = sessionStorage[key];
-        this.sessionData.push({ key, value });
-      }
-    }
-    for (const key in localStorage) {
-      if (Object.hasOwnProperty.call(localStorage, key)) {
-        const value = localStorage[key];
-        this.localData.push({ key, value });
-      }
-    }
+    this.listener();
   },
 };
 </script>

@@ -24,10 +24,10 @@ chrome.runtime.onConnect.addListener(function (port) {
 
 // 接收内容脚本的消息，并发送到devtool的消息
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  alert(JSON.stringify(message));
   if (sender.tab) {
     const tabId = sender.tab.id;
     if (tabId in connections) {
-      alert("background connect");
       alert(JSON.stringify(message));
       connections[tabId].postMessage(message);
     } else {
