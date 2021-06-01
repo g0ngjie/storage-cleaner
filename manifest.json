@@ -35,5 +35,5 @@
     }
   ],
   "web_accessible_resources": ["inject.js"],
-  "devtools_page": "page/dist/index.html"
+  "devtools_page": "devtools.html"
 }

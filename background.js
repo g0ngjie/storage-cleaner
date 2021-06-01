@@ -6,10 +6,22 @@ chrome.runtime.onConnect.addListener(function (port) {
     if (message.name == "original") {
       connections[message.tabId] = port;
     }
+    alert(JSON.stringify(message));
+    alert(JSON.stringify(message.from));
+    alert(message.from === "page")
+    if (message.from === "page") {
+      port.postMessage({
+        from: "background",
+        to: "content",
+        type: message.type,
+        data: message.data,
+      });
+    }
   };
   port.onMessage.addListener(extensionListener);
 
   port.onDisconnect.addListener(function (port) {
+    alert('onDisconnect')
     port.onMessage.removeListener(extensionListener);
 
     const tabs = Object.keys(connections);
@@ -22,9 +34,30 @@ chrome.runtime.onConnect.addListener(function (port) {
   });
 });
 
+// postMessage({
+//   from: "background",
+//   to: "content",
+//   type: "message.type",
+// });
+
+// chrome.runtime.sendMessage({
+//   type: "__ajax_proxy",
+//   to: "page",
+//   match: "match",
+// });
+
 // 接收内容脚本的消息，并发送到devtool的消息
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  alert(1)
   alert(JSON.stringify(message));
+  alert(JSON.stringify(sender))
+  // const { type } = message
+  // chrome.runtime.sendMessage({
+  //   to: "content",
+  //   from: "background",
+  //   type
+  // });
+  // postMessage(message)
   if (sender.tab) {
     const tabId = sender.tab.id;
     if (tabId in connections) {
